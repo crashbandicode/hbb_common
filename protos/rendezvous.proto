@@ -28,6 +28,8 @@ message PunchHoleRequest {
   bool force_relay = 8;
   int32 upnp_port = 9;
   bytes socket_addr_v6 = 10;
+  // [ICE experiment] initiator's server-reflexive candidate "ip:port" from public STUN.
+  string ice_srflx = 11;
 }
 
 message ControlPermissions {
@@ -63,6 +65,8 @@ message PunchHole {
   bytes socket_addr_v6 = 7;
   ControlPermissions control_permissions = 8;
   ControlledContext controlled_context = 9;
+  // [ICE experiment] initiator's server-reflexive candidate, copied through verbatim by hbbs.
+  string ice_srflx = 10;
 }
 
 message TestNatRequest {
@@ -89,6 +93,8 @@ message PunchHoleSent {
   string version = 5;
   int32 upnp_port = 6;
   bytes socket_addr_v6 = 7;
+  // [ICE experiment] controlled peer's server-reflexive candidate "ip:port" from public STUN.
+  string ice_srflx = 8;
 }
 
 message RegisterPk {
@@ -134,6 +140,8 @@ message PunchHoleResponse {
   bool is_udp = 9;
   int32 upnp_port = 10;
   bytes socket_addr_v6 = 11;
+  // [ICE experiment] controlled peer's server-reflexive candidate, copied through verbatim by hbbs.
+  string ice_srflx = 12;
 }
 
 message ConfigUpdate {
