@@ -696,6 +696,9 @@ message OptionMessage {
   BoolOption disable_camera = 17;
   BoolOption terminal_persistent = 18;
   BoolOption show_my_cursor = 19;
+  // Controlling side is backgrounded/minimized. Used by Windows hosts to
+  // restore Synergy while a remote session remains connected but inactive.
+  BoolOption viewer_backgrounded = 20;
 }
 
 message TestDelay {
