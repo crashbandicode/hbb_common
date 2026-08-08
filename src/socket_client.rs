@@ -209,8 +209,9 @@ async fn test_target(target: &str) -> ResultType<SocketAddr> {
             return Ok(addr);
         }
     }
-    tokio::net::lookup_host(target)
-        .await?
+    super::timeout(1000, tokio::net::lookup_host(target))
+        .await
+        .with_context(|| format!("Timed out looking up host for {target}"))??
         .next()
         .context(format!("Failed to look up host for {target}"))
 }

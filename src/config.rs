@@ -829,7 +829,11 @@ impl Config {
         }
         #[cfg(target_os = "android")]
         {
-            let mut path = Self::get_home();
+            // APP_HOME_DIR intentionally points at shared storage for the file
+            // browser, but Android 11+ does not grant ordinary file writes to
+            // that root. Logs are private app data and must live below APP_DIR,
+            // which remains writable under scoped storage without broad access.
+            let mut path = Self::path("");
             path.push(format!("{}/Logs", *APP_NAME.read().unwrap()));
             std::fs::create_dir_all(&path).ok();
             return path;
