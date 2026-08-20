@@ -699,6 +699,10 @@ message OptionMessage {
   // Controlling side is backgrounded/minimized. Used by Windows hosts to
   // restore Synergy while a remote session remains connected but inactive.
   BoolOption viewer_backgrounded = 20;
+  // Low-overhead power profiling is enabled on the controlling side. Peers
+  // converge with OR semantics: either side may enable collection, but an
+  // unset/disabled value never disables collection on the other endpoint.
+  BoolOption power_profiling = 21;
 }
 
 message TestDelay {
@@ -777,6 +781,10 @@ message BackNotification {
   string details = 3;
   // The key of the implementation
   string impl_key = 4;
+  // True when either endpoint has enabled low-overhead power profiling. This
+  // acknowledges the controlling side and lets it converge without requiring
+  // both peers to run the same client version.
+  bool power_profiling_enabled = 5;
 }
 
 message ElevationRequestWithLogon {
